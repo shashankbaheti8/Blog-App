@@ -1,5 +1,10 @@
 const { Router } = require("express");
-const { handleAddBlog, upload, getBlogById } = require("../controllers/blog");
+const {
+  handleAddBlog,
+  upload,
+  getBlogById,
+  handleAddComment,
+} = require("../controllers/blog");
 
 const router = Router();
 
@@ -9,8 +14,8 @@ router.get("/add-new", (req, res) => {
   });
 });
 
-router.get("/:id", getBlogById);
-
 router.post("/", upload.single("coverImage"), handleAddBlog);
+router.get("/:id", getBlogById);
+router.post("/comment/:blogId", handleAddComment);
 
 module.exports = router;

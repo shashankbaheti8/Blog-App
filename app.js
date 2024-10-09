@@ -1,8 +1,9 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-const PORT = 3000;
+const PORT = process.env.PORT;
 const cookieParser = require("cookie-parser");
+require("dotenv").config();
 
 const userRoute = require("./routes/user");
 const blogRoute = require("./routes/blog");
@@ -10,7 +11,7 @@ const Blog = require("./models/blog");
 const { connectToDB } = require("./connection");
 const { checkForAuthenticationCookie } = require("./middlewares/auth");
 
-connectToDB("mongodb://localhost:27017/blog-App").then(() => {
+connectToDB(process.env.MONGOURL).then(() => {
   console.log("Database Connected");
 });
 
